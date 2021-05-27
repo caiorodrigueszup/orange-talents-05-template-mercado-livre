@@ -23,7 +23,7 @@ public class Usuario {
 	
 	@NotBlank
 	@Email
-	private String login;
+	private String email;
 	
 	@NotBlank
 	@Size(min = 6)
@@ -35,17 +35,17 @@ public class Usuario {
 	@Deprecated
 	public Usuario() {};
 
-	public Usuario(@NotBlank @Email String login, @Valid @NotNull SenhaLimpa senhaLimpa){
-		Assert.hasLength(login, "O email deve ser preenchido.");
+	public Usuario(@NotBlank @Email String email, @Valid @NotNull SenhaLimpa senhaLimpa){
+		Assert.hasLength(email, "O email deve ser preenchido.");
 		Assert.notNull(senhaLimpa, "A senha precisa estar preenchida");
 		
-		this.login = login;
+		this.email = email;
 		this.senha = senhaLimpa.hash();
 		
 	}
 
 	@Override
 	public String toString() {
-		return "Id: " + id + ", login: " + login + ", senha: " + senha + ", dataCriacao=" + dataCriacao;
+		return "Id: " + id + ", email: " + email + ", senha: " + senha + ", dataCriacao=" + dataCriacao;
 	}
 }
