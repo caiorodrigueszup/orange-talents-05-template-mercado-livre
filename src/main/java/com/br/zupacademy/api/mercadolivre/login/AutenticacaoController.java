@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.zupacademy.api.mercadolivre.security.TokenService;
+import com.br.zupacademy.api.mercadolivre.seguranca.ConfiguracaoDeToken;
 
 @RestController
 @RequestMapping("/auth")
@@ -23,7 +23,7 @@ public class AutenticacaoController {
 	private AuthenticationManager authManager;
 	
 	@Autowired
-	private TokenService tokenService;
+	private ConfiguracaoDeToken tokenService;
 
 	@PostMapping
 	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form) {

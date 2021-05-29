@@ -1,4 +1,4 @@
-package com.br.zupacademy.api.mercadolivre.security;
+package com.br.zupacademy.api.mercadolivre.seguranca;
 
 import java.util.Optional;
 
@@ -12,7 +12,7 @@ import com.br.zupacademy.api.mercadolivre.novousuario.Usuario;
 import com.br.zupacademy.api.mercadolivre.novousuario.UsuarioRepository;
 
 @Service
-public class AutenticacaoService implements UserDetailsService {
+public class BuscarUsuarioPorEmailParaAutenticar implements UserDetailsService {
 	@Autowired
 	private UsuarioRepository repository;
 

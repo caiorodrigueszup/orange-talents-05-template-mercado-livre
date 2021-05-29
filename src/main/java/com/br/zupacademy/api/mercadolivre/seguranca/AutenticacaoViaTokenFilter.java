@@ -1,4 +1,4 @@
-package com.br.zupacademy.api.mercadolivre.security;
+package com.br.zupacademy.api.mercadolivre.seguranca;
 
 import java.io.IOException;
 
@@ -16,10 +16,10 @@ import com.br.zupacademy.api.mercadolivre.novousuario.UsuarioRepository;
 
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 
-	private TokenService tokenService;
+	private ConfiguracaoDeToken tokenService;
 	private UsuarioRepository repository;
 
-	public AutenticacaoViaTokenFilter(TokenService tokenService, UsuarioRepository repository) {
+	public AutenticacaoViaTokenFilter(ConfiguracaoDeToken tokenService, UsuarioRepository repository) {
 		this.tokenService = tokenService;
 		this.repository = repository;
 	}

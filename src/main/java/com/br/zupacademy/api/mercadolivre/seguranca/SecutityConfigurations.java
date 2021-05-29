@@ -1,4 +1,4 @@
-package com.br.zupacademy.api.mercadolivre.security;
+package com.br.zupacademy.api.mercadolivre.seguranca;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,10 +23,10 @@ public class SecutityConfigurations extends WebSecurityConfigurerAdapter {
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
-	private AutenticacaoService autenticacaoService;
+	private BuscarUsuarioPorEmailParaAutenticar autenticacaoService;
 	
 	@Autowired
-	private TokenService tokenService;
+	private ConfiguracaoDeToken tokenService;
 	
 	@Override
 	@Bean

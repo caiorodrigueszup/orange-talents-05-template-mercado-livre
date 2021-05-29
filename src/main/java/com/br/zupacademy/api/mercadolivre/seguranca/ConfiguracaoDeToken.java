@@ -1,4 +1,4 @@
-package com.br.zupacademy.api.mercadolivre.security;
+package com.br.zupacademy.api.mercadolivre.seguranca;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
-public class TokenService {
+public class ConfiguracaoDeToken {
 	
 	@Value("${forum.jwt.expiration}")
 	private String expiration;
@@ -27,7 +27,7 @@ public class TokenService {
 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
 		return Jwts.builder()
-				.setIssuer("API do Fórum da Alura")
+				.setIssuer("mercado-livre")
 				.setSubject(logado.getId().toString())
 				.setIssuedAt(hoje)
 				.setExpiration(dataExpiracao)
