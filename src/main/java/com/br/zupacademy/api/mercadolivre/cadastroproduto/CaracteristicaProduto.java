@@ -39,6 +39,14 @@ public class CaracteristicaProduto {
 	public String toString() {
 		return "CaracteristicaProduto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + "]";
 	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
 
 	@Override
 	public int hashCode() {

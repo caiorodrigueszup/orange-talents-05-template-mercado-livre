@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -14,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -26,6 +30,8 @@ import org.springframework.util.Assert;
 
 import com.br.zupacademy.api.mercadolivre.cadastrocategoria.Categoria;
 import com.br.zupacademy.api.mercadolivre.cadastroimagemparaproduto.ImagemProduto;
+import com.br.zupacademy.api.mercadolivre.novaopiniaoproduto.Opiniao;
+import com.br.zupacademy.api.mercadolivre.novapergunta.Pergunta;
 import com.br.zupacademy.api.mercadolivre.novousuario.Usuario;
 
 @Entity
@@ -62,6 +68,13 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
 	private Set<ImagemProduto> imagens = new HashSet<ImagemProduto>();
 
+	@OneToMany(mappedBy = "produto")
+	@OrderBy("titulo asc")
+	private SortedSet<Pergunta> perguntas = new TreeSet<Pergunta>();
+
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<Opiniao> opinioes = new HashSet<Opiniao>();
+	
 	@Deprecated
 	public Produto() {
 	}
@@ -104,6 +117,22 @@ public class Produto {
 	public String getNome() {
 		return nome;
 	}
+	
+	public BigDecimal getValor() {
+		return valor;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public Set<ImagemProduto> getImagens() {
+		return imagens;
+	}
+	
+	public Set<CaracteristicaProduto> getCaracteristicas() {
+		return caracteristicas;
+	}
 
 	public Long idUsuarioPertenceAProduto() {
 		return usuario.getId();
@@ -118,5 +147,23 @@ public class Produto {
 
 	public boolean pertenceAoUsuario(Usuario usuarioAutenticado) {
 		return this.usuario.equals(usuarioAutenticado);
+	}
+
+	public <T> Set<T> mapeiaCaracteristicas(
+			Function<CaracteristicaProduto, T> mapFunction) {
+		return this.caracteristicas.stream().map(mapFunction).collect(Collectors.toSet());
+	}
+
+	public <T> Set<T> mapeiaImagens(Function<ImagemProduto, T> mapFunction) {
+		return this.imagens.stream().map(mapFunction).collect(Collectors.toSet());
+	}
+
+	public <T extends Comparable<T>> SortedSet<T> mapeiaPerguntas(Function<Pergunta, T> funcaoMapeadora) {
+		return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
+	}
+
+
+	public Opinioes getOpinioes() {
+		return new Opinioes(this.opinioes);
 	}
 }

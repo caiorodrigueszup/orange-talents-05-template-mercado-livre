@@ -41,6 +41,10 @@ public class ImagemProduto {
 	public String toString() {
 		return "ImagemProduto [id=" + id + ", link=" + link + "]";
 	}
+	
+	public String getLink() {
+		return link;
+	}
 
 	@Override
 	public int hashCode() {
