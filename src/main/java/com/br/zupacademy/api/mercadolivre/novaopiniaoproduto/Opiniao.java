@@ -58,6 +58,7 @@ public class Opiniao {
 		
 		Assert.notNull(produto, "É preciso ter o produto para fazer uma opinião.");
 		Assert.notNull(usuario, "É preciso ter o usuário para fazer uma opinião");
+		
 		this.usuario = usuario;
 		this.produto = produto;
 	}

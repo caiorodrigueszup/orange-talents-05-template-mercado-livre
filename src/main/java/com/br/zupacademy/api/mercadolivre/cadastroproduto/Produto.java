@@ -96,6 +96,14 @@ public class Produto {
 				+ ", categoria=" + categoria + ", usuario=" + usuario + ", instanteDaCriacao=" + instanteDaCriacao
 				+ ", imagens=" + imagens + "]";
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
 
 	public Long idUsuarioPertenceAProduto() {
 		return usuario.getId();
