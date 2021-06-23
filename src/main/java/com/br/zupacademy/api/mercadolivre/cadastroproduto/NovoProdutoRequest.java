@@ -31,7 +31,7 @@ public class NovoProdutoRequest {
 	
 	@Min(0)
 	@NotNull
-	private Long quantidadeDisponivel;
+	private Integer quantidadeDisponivel;
 	
 	@Size(min = 3)
 	@Valid
@@ -48,7 +48,7 @@ public class NovoProdutoRequest {
 	private Long idCategoria;
 
 	public NovoProdutoRequest(@NotBlank String nome, @NotNull @Positive BigDecimal valor,
-			@Min(0) @NotNull Long quantidadeDisponivel, @Size(min = 3) @Valid List<NovaCaracteristicaRequest> caracteristicas,
+			@Min(0) @NotNull Integer quantidadeDisponivel, @Size(min = 3) @Valid List<NovaCaracteristicaRequest> caracteristicas,
 			@NotBlank @Length(max = 1000) String descricao, @NotNull @Valid Long idCategoria) {
 		this.nome = nome;
 		this.valor = valor;

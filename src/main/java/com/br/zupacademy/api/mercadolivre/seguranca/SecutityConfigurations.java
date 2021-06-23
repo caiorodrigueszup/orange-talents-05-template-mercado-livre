@@ -44,6 +44,7 @@ public class SecutityConfigurations extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/auth").permitAll()
 		.antMatchers("/usuarios").permitAll()
+		.antMatchers("/actuator/**").permitAll()
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

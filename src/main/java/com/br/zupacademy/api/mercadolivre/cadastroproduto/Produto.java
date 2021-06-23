@@ -43,7 +43,7 @@ public class Produto {
 
 	private @NotBlank String nome;
 	private @NotNull @Positive BigDecimal valor;
-	private @Min(0) @NotNull Long quantidadeDisponivel;
+	private @Min(0) @NotNull Integer quantidadeDisponivel;
 
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private @Size(min = 3) @Valid @NotNull Set<CaracteristicaProduto> caracteristicas = new HashSet<CaracteristicaProduto>();
@@ -80,7 +80,7 @@ public class Produto {
 	}
 
 	public Produto(@NotBlank String nome, @NotNull @Positive BigDecimal valor,
-			@Min(0) @NotNull Long quantidadeDisponivel,
+			@Min(0) @NotNull Integer quantidadeDisponivel,
 			@Size(min = 3) @Valid @NotNull Collection<NovaCaracteristicaRequest> caracteristicas,
 			@NotBlank @Length(max = 1000) String descricao, @NotNull @Valid Categoria categoria,
 			@NotNull @Valid Usuario usuario) {
@@ -93,8 +93,8 @@ public class Produto {
 		Assert.isTrue(caracteristicasProduto.size() >= 3,
 				"É preciso de no mínimo 3 característica para cadastrar um produto.");
 		
-		Assert.isNull(usuario, "O usuário não pode ser nulo");
-		Assert.isNull(categoria, "Você precisa informar uma categoria");
+		Assert.notNull(usuario, "O usuário não pode ser nulo");
+		Assert.notNull(categoria, "Você precisa informar uma categoria");
 
 		this.caracteristicas = caracteristicasProduto;
 		this.descricao = descricao;
@@ -166,4 +166,14 @@ public class Produto {
 	public Opinioes getOpinioes() {
 		return new Opinioes(this.opinioes);
 	}
+
+    public boolean temEstoqueParaAbater(@Positive Integer quantidadePedida) {
+		Assert.isTrue(quantidadePedida > 0, "Quantidade deve ser maior que 0.");
+
+		if (quantidadeDisponivel < quantidadePedida) {
+			return false;
+		}
+		quantidadeDisponivel -= quantidadePedida;
+		return true;
+    }
 }
